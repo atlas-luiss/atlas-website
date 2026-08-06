@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>ATLAS Lab — Adaptive and Physical AI Agents</title>
+<meta name="description" content="ATLAS Lab studies adaptive and physical AI agents: embodied systems that perceive, reason and act in the real world. Directed by Vincenzo Lomonaco, part of the AI4Society Research Center at LUISS Guido Carli University, Rome.">
+<link rel="icon" href="assets/atlas_logo.png">
+<link rel="apple-touch-icon" href="assets/atlas_logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ATLAS Lab — Adaptive and Physical AI Agents">
+<meta property="og:description" content="Adaptive and physical AI agents at LUISS Guido Carli University, Rome.">
+<meta property="og:url" content="https://atlas.vincenzolomonaco.com/">
+<meta property="og:image" content="https://atlas.vincenzolomonaco.com/assets/atlas_logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { background: #f4f6f8; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  a { color: #16232f; text-decoration: none; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color 150ms ease-out; }
+  a:hover { color: #00447c; }
+  ::selection { background: #cfe0ee; }
+  /* links written inside data.js prose */
+  #vision p a { color: #00447c; text-decoration: underline; text-decoration-color: #a9c4da; }
+  #vision p a:hover { text-decoration-color: #00447c; }
+  img { max-width: 100%; }
+  @keyframes atlasFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes atlasMenu { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<div style="min-height:100vh; background:#f4f6f8; color:#16232f; font-family:'Inter',system-ui,sans-serif;">
+
+  <nav ref="{{ navRef }}" style="position:sticky; top:0; z-index:60; background:rgba(244,246,248,0.92); backdrop-filter:blur(12px); border-bottom:1px solid #e3e9ef; box-shadow:{{ navShadow }}; transition:box-shadow 180ms ease-out;">
+    <div style="max-width:1000px; margin:0 auto; padding:8px clamp(16px,4vw,32px); display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <a href="#top" style="display:flex; align-items:center; gap:9px; min-width:0; padding:6px 0;">
+        <img src="assets/atlas_logo.png" alt="ATLAS Lab logo" style="width:34px; height:34px; object-fit:contain; flex:none;">
+        <span style="font-family:'Source Serif 4',serif; font-weight:500; font-size:16px; letter-spacing:0.01em; color:#16232f; white-space:nowrap;">{{ labName }}</span>
+      </a>
+
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:clamp(16px,2.4vw,28px); font-size:13.5px; letter-spacing:0.01em; color:#5b6b7b;">
+          <a href="#vision" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">Vision</a>
+          <a href="#articles" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">Articles</a>
+          <a href="#people" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">People</a>
+          <a href="#contact" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">Contact</a>
+          <a href="{{ githubUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:34px; padding:0 15px; border-radius:10px; background:#00447c; color:#ffffff; font-weight:500; font-size:13px; white-space:nowrap;" style-hover="color:#ffffff; background:#002d52;">GitHub</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isNarrow }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; border:none; background:transparent; color:#16232f; cursor:pointer; padding:0; margin-right:-8px;">
+          {{ menuIcon }}
+        </button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid #e3e9ef; background:#ffffff; animation:atlasMenu 160ms ease-out both;">
+        <div style="max-width:1000px; margin:0 auto; padding:6px clamp(16px,4vw,32px) 14px; display:flex; flex-direction:column;">
+          <a href="#vision" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">Vision</a>
+          <a href="#articles" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">Articles</a>
+          <a href="#people" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">People</a>
+          <a href="#contact" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">Contact</a>
+          <a href="{{ githubUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:46px; margin-top:14px; border-radius:10px; background:#00447c; color:#ffffff; font-weight:500; font-size:14px;" style-hover="color:#ffffff;">GitHub organization</a>
+        </div>
+      </div>
+    </sc-if>
+  </nav>
+
+  <main id="top" style="max-width:1000px; margin:0 auto; padding:0 clamp(16px,4vw,32px);">
+
+    <!-- HERO -->
+    <sc-if value="{{ heroCentered }}" hint-placeholder-val="{{ true }}">
+      <header style="padding:clamp(36px,5vw,60px) 0 clamp(40px,6vw,68px); display:flex; flex-direction:column; align-items:center; text-align:center; animation:atlasFade 400ms ease-out both;">
+        <img src="assets/atlas_logo.png" alt="ATLAS Lab logo" style="width:clamp(118px,18vw,158px); height:auto; object-fit:contain; margin-bottom:22px;">
+        <h1 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(32px,5.4vw,46px); line-height:1.1; letter-spacing:-0.015em; margin:0 0 8px; text-wrap:pretty;">{{ labName }}</h1>
+        <div style="font-family:'Source Serif 4',serif; font-size:clamp(17px,2.4vw,21px); line-height:1.35; color:#00447c; text-wrap:pretty;">{{ tagline }}</div>
+        <div style="font-size:13.5px; line-height:1.5; color:#7d8b99; margin-top:14px;">{{ location }}</div>
+      </header>
+    </sc-if>
+
+    <sc-if value="{{ heroTypographic }}" hint-placeholder-val="{{ false }}">
+      <header style="padding:clamp(36px,5vw,60px) 0 clamp(40px,6vw,68px); animation:atlasFade 400ms ease-out both;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#00447c; margin-bottom:14px;">{{ university }}</div>
+        <h1 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(34px,6vw,52px); line-height:1.08; letter-spacing:-0.015em; margin:0 0 10px; text-wrap:pretty;">{{ labName }}</h1>
+        <div style="font-family:'Source Serif 4',serif; font-size:clamp(18px,2.6vw,23px); line-height:1.35; color:#00447c; padding-bottom:22px; border-bottom:1px solid #e3e9ef; text-wrap:pretty;">{{ tagline }}</div>
+      </header>
+    </sc-if>
+
+    <sc-if value="{{ heroSide }}" hint-placeholder-val="{{ false }}">
+      <header style="padding:clamp(36px,5vw,64px) 0 clamp(44px,7vw,76px); animation:atlasFade 400ms ease-out both;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:clamp(18px,3.5vw,36px);">
+          <img src="assets/atlas_logo.png" alt="ATLAS Lab logo" style="width:clamp(112px,18vw,152px); height:auto; flex:none; object-fit:contain;">
+          <div style="flex:1 1 280px; min-width:0;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#00447c; margin-bottom:14px;">{{ university }}</div>
+            <h1 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(32px,5.4vw,46px); line-height:1.1; letter-spacing:-0.015em; margin:0 0 8px; text-wrap:pretty;">{{ labName }}</h1>
+            <div style="font-family:'Source Serif 4',serif; font-size:clamp(17px,2.4vw,21px); line-height:1.35; color:#00447c; text-wrap:pretty;">{{ tagline }}</div>
+          </div>
+        </div>
+      </header>
+    </sc-if>
+
+    <!-- VISION -->
+    <section id="vision" style="padding:clamp(14px,2vw,20px) 0 8px; scroll-margin-top:calc(var(--atlas-nav-h, 56px) + 16px);">
+      <div style="font-size:16px; line-height:1.68; color:#3c4a58; display:flex; flex-direction:column; gap:18px;">{{ visionEls }}</div>
+
+      <!-- FEATURED FIGURE -->
+      <div style="margin-top:clamp(28px,4vw,40px);">{{ heroFigure }}</div>
+
+      <sc-if value="{{ hasHint }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:30px; background:#eef3f8; border:1px solid #dde6ee; border-left:3px solid #00447c; border-radius:10px; padding:15px 18px; font-size:14px; line-height:1.6; color:#3c4a58;">{{ hintEl }}</div>
+      </sc-if>
+    </section>
+
+    <!-- ARTICLES -->
+    <section id="articles" style="padding:clamp(44px,6vw,64px) 0 8px; scroll-margin-top:calc(var(--atlas-nav-h, 56px) + 16px);">
+      <h2 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(22px,3.2vw,27px); letter-spacing:-0.01em; margin:0 0 18px;">Selected articles</h2>
+      <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+        <sc-for list="{{ articles }}" as="a" hint-placeholder-count="4">
+          <li style="padding:15px 0; border-top:1px solid #e3e9ef; display:flex; flex-direction:column; gap:5px;">
+            <sc-if value="{{ a.hasUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ a.url }}" target="_blank" rel="noopener" style="font-family:'Source Serif 4',serif; font-size:17px; line-height:1.35; color:#16232f;" style-hover="color:#00447c;">{{ a.title }}</a>
+            </sc-if>
+            <sc-if value="{{ a.noUrl }}" hint-placeholder-val="{{ false }}">
+              <span style="font-family:'Source Serif 4',serif; font-size:17px; line-height:1.35; color:#16232f;">{{ a.title }}</span>
+            </sc-if>
+            <div style="font-size:13px; color:#7d8b99;">{{ a.meta }}</div>
+          </li>
+        </sc-for>
+      </ul>
+      <div style="border-top:1px solid #e3e9ef; padding-top:16px;">
+        <a href="{{ scholarUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:40px; font-size:14px; color:#00447c;" style-hover="color:#002d52;">See all articles →</a>
+      </div>
+    </section>
+
+    <!-- PEOPLE -->
+    <section id="people" style="padding:clamp(44px,6vw,64px) 0 8px; scroll-margin-top:calc(var(--atlas-nav-h, 56px) + 16px);">
+      <h2 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(22px,3.2vw,27px); letter-spacing:-0.01em; margin:0 0 4px;">People</h2>
+      <div style="font-size:14px; color:#7d8b99; margin-bottom:22px;">Members, mentees and alumni of the lab.</div>
+
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#00447c; margin:6px 0 14px;">Members</div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr)); gap:10px; margin-bottom:36px;">
+        <sc-for list="{{ members }}" as="p" hint-placeholder-count="8">
+          <div style="background:#ffffff; border-radius:10px; border:1px solid #e3e9ef; padding:14px 16px; min-width:0;">
+            <sc-if value="{{ p.hasUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ p.url }}" target="_blank" rel="noopener" style="display:block; font-weight:500; font-size:14.5px; color:#16232f; overflow-wrap:break-word;" style-hover="color:#00447c;">{{ p.name }}</a>
+            </sc-if>
+            <sc-if value="{{ p.noUrl }}" hint-placeholder-val="{{ false }}">
+              <span style="display:block; font-weight:500; font-size:14.5px; color:#16232f; overflow-wrap:break-word;">{{ p.name }}</span>
+            </sc-if>
+            <div style="font-size:12.5px; color:#7d8b99; margin-top:2px;">{{ p.role }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#00447c; margin:6px 0 14px;">Mentees</div>
+      <ul style="list-style:none; margin:0 0 36px; padding:0; display:flex; flex-direction:column;">
+        <sc-for list="{{ mentees }}" as="p" hint-placeholder-count="4">
+          <li style="padding:12px 0; border-top:1px solid #e3e9ef; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 10px;">
+            <sc-if value="{{ p.hasUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ p.url }}" target="_blank" rel="noopener" style="font-weight:500; font-size:14.5px; color:#16232f;" style-hover="color:#00447c;">{{ p.name }}</a>
+            </sc-if>
+            <sc-if value="{{ p.noUrl }}" hint-placeholder-val="{{ false }}">
+              <span style="font-weight:500; font-size:14.5px; color:#16232f;">{{ p.name }}</span>
+            </sc-if>
+            <span style="font-size:13px; color:#7d8b99;">{{ p.role }}</span>
+          </li>
+        </sc-for>
+      </ul>
+
+      <sc-if value="{{ hasPrevious }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:#7d8b99; margin:6px 0 14px;">Previous members</div>
+          <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column;">
+            <sc-for list="{{ previousMembers }}" as="p" hint-placeholder-count="1">
+              <li style="padding:12px 0; border-top:1px solid #e3e9ef; display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 10px;">
+                <sc-if value="{{ p.hasUrl }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ p.url }}" target="_blank" rel="noopener" style="font-weight:500; font-size:14.5px; color:#16232f;" style-hover="color:#00447c;">{{ p.name }}</a>
+                </sc-if>
+                <sc-if value="{{ p.noUrl }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-weight:500; font-size:14.5px; color:#16232f;">{{ p.name }}</span>
+                </sc-if>
+                <span style="font-size:13px; color:#7d8b99;">{{ p.role }}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-if>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" style="padding:clamp(44px,6vw,64px) 0 36px; scroll-margin-top:calc(var(--atlas-nav-h, 56px) + 16px);">
+      <div style="background:#002d52; border-radius:16px; padding:clamp(26px,4vw,40px) clamp(22px,3.5vw,36px); color:#ffffff;">
+        <h2 style="font-family:'Source Serif 4',serif; font-weight:500; font-size:clamp(21px,3vw,26px); letter-spacing:-0.01em; margin:0 0 10px; color:#ffffff;">Get in touch</h2>
+        <p style="font-size:15px; line-height:1.65; color:#b9cbdb; margin:0 0 22px; max-width:58ch;">Interested in adaptive and physical AI agents? Reach out about collaborations, PhD and research positions, or open-source contributions.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+          <a href="{{ contactHref }}" style="display:inline-flex; align-items:center; min-height:42px; padding:0 18px; border-radius:10px; background:#ffffff; color:#002d52; font-weight:500; font-size:14px; overflow-wrap:anywhere;" style-hover="color:#002d52;">{{ contactEmail }}</a>
+          <a href="{{ githubUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:42px; padding:0 18px; border-radius:10px; color:#ffffff; font-size:14px; border:1px solid #2c5378;" style-hover="color:#ffffff;">GitHub organization</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top:1px solid #e3e9ef; background:#ffffff;">
+    <div style="max-width:1000px; margin:0 auto; padding:22px clamp(16px,4vw,32px); display:flex; flex-wrap:wrap; align-items:center; gap:14px 24px; justify-content:space-between;">
+      <a href="{{ universityUrl }}" target="_blank" rel="noopener" style="flex:none;">
+        <img src="assets/luiss.png" alt="LUISS Guido Carli University" style="height:60px; width:auto; display:block;">
+      </a>
+      <div style="display:flex; flex-direction:column; gap:3px; font-size:12.5px; line-height:1.5; color:#7d8b99; margin-left:auto; text-align:right;">
+        <span>{{ copyright }}</span>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;centered&quot;,&quot;typographic&quot;,&quot;side&quot;],&quot;default&quot;:&quot;centered&quot;,&quot;tsType&quot;:&quot;'centered' | 'typographic' | 'side'&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+class Component extends DCLogic {
+  state = { D: null, isNarrow: false, menuOpen: false, scrolled: false };
+  navRef = React.createRef();
+
+  syncNavHeight = () => {
+    const n = this.navRef.current;
+    if (n) document.documentElement.style.setProperty('--atlas-nav-h', Math.round(n.offsetHeight) + 'px');
+  };
+
+  onResize = () => {
+    const narrow = window.innerWidth < 720;
+    if (narrow !== this.state.isNarrow) {
+      this.setState({ isNarrow: narrow, menuOpen: narrow ? this.state.menuOpen : false });
+    }
+    this.syncNavHeight();
+  };
+
+  onScroll = () => {
+    const s = window.scrollY > 4;
+    if (s !== this.state.scrolled) this.setState({ scrolled: s });
+  };
+
+  componentDidUpdate() { this.syncNavHeight(); }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this._ro) this._ro.disconnect();
+  }
+
+  async componentDidMount() {
+    document.documentElement.lang = 'en';
+    this.setState({ isNarrow: window.innerWidth < 720, scrolled: window.scrollY > 4 });
+    this.syncNavHeight();
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    if (window.ResizeObserver && this.navRef.current) {
+      this._ro = new ResizeObserver(this.syncNavHeight);
+      this._ro.observe(this.navRef.current);
+    }
+    try {
+      const m = await import('./data.js');
+      this.setState({ D: m.DATA });
+    } catch (e) {
+      console.error('Could not load data.js', e);
+    }
+  }
+
+  icon(open) {
+    const line = (d, key) => React.createElement('path', { key, d, stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round' });
+    return React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', 'aria-hidden': 'true' },
+      open
+        ? [line('M6 6 L18 18', 'a'), line('M18 6 L6 18', 'b')]
+        : [line('M3.5 7 H20.5', 'a'), line('M3.5 12 H20.5', 'b'), line('M3.5 17 H20.5', 'c')]
+    );
+  }
+
+  renderVals() {
+    const D = this.state.D || {};
+    const withUrl = (arr) => (arr || []).map((x) => ({
+      ...x,
+      hasUrl: !!(x.url && x.url.trim()),
+      noUrl: !(x.url && x.url.trim()),
+    }));
+
+    const visionEls = (D.vision || []).map((html, i) =>
+      React.createElement('p', { key: i, style: { margin: 0 }, dangerouslySetInnerHTML: { __html: html } })
+    );
+
+    let heroFigure = null;
+    if (this.state.D) {
+      const hasHero = !!(D.heroImage && D.heroImage.trim());
+      const cap = React.createElement('figcaption', {
+        style: { fontSize: '13px', lineHeight: 1.6, color: '#7d8b99', marginTop: '12px' },
+      }, D.heroCaption || '');
+      const media = hasHero
+        ? React.createElement('img', {
+            src: D.heroImage, alt: '',
+            style: { display: 'block', width: '100%', maxWidth: '820px', maxHeight: '420px', margin: '0 auto', objectFit: 'contain', borderRadius: '14px', background: '#ffffff', border: '1px solid #e3e9ef', padding: '10px' },
+          })
+        : React.createElement('div', { style: { width: '100%', maxWidth: '820px', margin: '0 auto', aspectRatio: '16 / 7', borderRadius: '14px', border: '1px dashed #c9d6e2', background: '#eef3f8', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '6px', textAlign: 'center', padding: '0 28px' } },
+            React.createElement('div', { style: { fontFamily: "'Source Serif 4',serif", fontSize: '19px', color: '#5b7c96' } }, 'Featured figure'),
+            React.createElement('div', { style: { fontSize: '12px', color: '#8ba3b8', fontFamily: "'JetBrains Mono',monospace" } },
+              'set ', React.createElement('span', { style: { color: '#00447c' } }, 'heroImage'), ' in data.js')
+          );
+      heroFigure = React.createElement('figure', { style: { margin: '0 0 8px' } }, media, cap);
+    }
+
+    let hintEl = null;
+    if (D.hint) {
+      // the link label is linked in place inside the sentence
+      const text = D.hint.text || '';
+      const label = D.hint.linkLabel || '';
+      const at = label ? text.indexOf(label) : -1;
+      const link = (t) => React.createElement('a', {
+        key: 'l', href: D.hint.linkUrl, target: '_blank', rel: 'noopener',
+        style: { color: '#00447c', fontWeight: 500, textDecoration: 'underline' },
+      }, t);
+      hintEl = React.createElement('span', null,
+        D.hint.linkUrl && at >= 0
+          ? [text.slice(0, at), link(label), text.slice(at + label.length)]
+          : (D.hint.linkUrl ? [text + ' ', link(label || D.hint.linkUrl)] : text)
+      );
+    }
+
+    const labName = D.labName || 'ATLAS Lab';
+    const heroLayout = this.props.heroLayout ?? D.heroLayout ?? 'centered';
+
+    return {
+      heroCentered: heroLayout === 'centered',
+      heroTypographic: heroLayout === 'typographic',
+      heroSide: heroLayout === 'side',
+      navRef: this.navRef,
+      isNarrow: this.state.isNarrow,
+      isWide: !this.state.isNarrow,
+      menuOpen: this.state.isNarrow && this.state.menuOpen,
+      menuIcon: this.icon(this.state.menuOpen),
+      toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      navShadow: this.state.scrolled ? 'rgba(16,36,56,0.10) 0 6px 20px, rgba(16,36,56,0.05) 0 1px 3px' : 'none',
+      labName,
+      tagline: D.tagline || '',
+      university: D.university || '',
+      address: D.address || '',
+      location: D.location || [D.university, D.address].filter(Boolean).join(', '),
+      githubUrl: D.githubUrl || '#',
+      scholarUrl: D.scholarUrl || 'https://scholar.google.com/citations?user=rQLINtQAAAAJ&hl=en',
+      githubLabel: (D.githubUrl || '').replace(/^https?:\/\/(www\.)?github\.com\//, '') || 'GitHub',
+      universityUrl: D.universityUrl || 'https://www.luiss.it/it',
+      contactEmail: D.contactEmail || '',
+      contactHref: 'mailto:' + (D.contactEmail || ''),
+      heroFigure,
+      visionEls,
+      hasHint: !!D.hint,
+      hintEl,
+      articles: (D.articles || []).map((a) => ({
+        ...a,
+        hasUrl: !!(a.url && a.url.trim()),
+        noUrl: !(a.url && a.url.trim()),
+        meta: [a.authors, a.venue].filter(Boolean).join(' · '),
+      })),
+      members: withUrl(D.members),
+      mentees: withUrl(D.mentees),
+      previousMembers: withUrl(D.previousMembers),
+      hasPrevious: (D.previousMembers || []).length > 0,
+      copyright: '© ' + new Date().getFullYear() + ' ' + labName + (D.footerLine ? ', ' + D.footerLine : ''),
+    };
+  }
+}
+</script>
+</body>
+</html>
