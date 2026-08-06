@@ -36,7 +36,7 @@ export const DATA = {
   // ---- Vision (one or more paragraphs; simple HTML allowed) ---------------
   vision: [
     "The <a href=\"https://www.luiss.it/en/research/applied-research/ai4society-research-center/atlas-lab-agenti-intelligenti-adattivi-e-fisici\" target=\"_blank\" rel=\"noopener\"><strong>ATLAS Lab</strong></a> studies <strong>adaptive</strong> and <strong>physical</strong> AI agents: embodied systems — robots and situated agents — that perceive, reason and act in the real world. Directed by <a href=\"https://vincenzolomonaco.com/\" target=\"_blank\" rel=\"noopener\">Vincenzo Lomonaco</a>, the lab is part of the <a href=\"https://www.luiss.it/en/research/applied-research/ai4society-research-center\" target=\"_blank\" rel=\"noopener\">AI4Society Research Center</a> at <a href=\"https://www.luiss.it/it\" target=\"_blank\" rel=\"noopener\">LUISS Guido Carli University</a>. Our goal is to close the gap between today's powerful but static foundation models and the demands of agents operating in open, dynamic and unpredictable environments.",
-    "Our research rests on three pillars. <strong>Adaptivity</strong>: agents learn across their entire lifetime, integrating new experience without forgetting what came before. <strong>Embodiment</strong>: intelligence emerges from the interplay of body, perception and action, not from a model isolated from the world. <strong>Compositionality</strong>: complex tasks can be solved through the dynamic composition of specialized AI agents and reusable skills.",
+    "Our research rests on three pillars. <strong>Adaptivity</strong>: agents learn across their entire lifetime, integrating new experience without forgetting what came before. <strong>Embodiment</strong>: intelligence emerges from the interplay of body, perception and action, not from a model isolated from the world. <strong>Compositionality</strong>: complex skills emerge from the dynamic recombination of specialized AI Agents and modules.",
     "By bringing together continual learning, robotics and foundation models, the ATLAS Lab aims to establish the theoretical and methodological groundwork for a new generation of physical agents — able to grow with experience, collaborate with people, and adapt to the world as it actually is. The group is supported by several grants, including the <em>FIS2 – Starting Grant</em> (the Italian equivalent of an ERC Starting Grant) with a budget of over €1.3M.",
   ],
 
@@ -54,6 +54,17 @@ export const DATA = {
     { title: "Book your room in the Turing Hotel! A symmetric and distributed Turing Test with multiple AIs and humans", authors: "Maio et al.", venue: "Preprint 2026", url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=rQLINtQAAAAJ&sortby=pubdate&citation_for_view=rQLINtQAAAAJ:geHnlv5EZngC" },
     { title: "The Future of Continual Learning in the Era of Foundation Models: Three Key Directions", authors: "Bell et al.", venue: "Trustworthy and Collaborative Artificial Intelligence Workshop, HHAI 2025", url: "https://arxiv.org/abs/2506.03320" },
     { title: "A Compositional Paradigm for Foundation Models: Towards Smarter Robotic Agents", authors: "Quarantiello et al.", venue: "I-RIM 3D Conference Workshop 2025", url: "https://arxiv.org/abs/2510.18608" },
+  ],
+
+  // ---- Collaborations -----------------------------------------------------
+  collaborations: [
+    {
+      name: "BRAIR Lab",
+      lead: "Prof. Egidio Falotico",
+      institution: "The BioRobotics Institute, Sant'Anna School of Advanced Studies, Pisa",
+      note: "Our main collaboration: joint work on embodied intelligence, soft robotics and adaptive control for physical agents.",
+      url: "https://www.santannapisa.it/it/istituto/biorobotica/brair-lab",
+    },
   ],
 
   // ---- Members ------------------------------------------------------------
