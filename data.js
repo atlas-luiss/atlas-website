@@ -42,7 +42,7 @@ export const DATA = {
 
   // Highlighted note below the vision (set to null to hide)
   hint: {
-    text: "Have a look at our GitHub organization to explore the open-source side of our research!",
+    text: "Have a look at our GitHub organization to explore our open-source contributions!",
     linkLabel: "GitHub organization",
     linkUrl: "https://github.com/atlas-luiss",
   },
