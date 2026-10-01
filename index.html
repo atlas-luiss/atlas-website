@@ -54,6 +54,7 @@
           <a href="#people" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">People</a>
           <a href="#collab" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">Collab</a>
           <a href="#contact" style="display:inline-flex; align-items:center; min-height:40px; color:#5b6b7b; white-space:nowrap;" style-hover="color:#16232f;">Contact</a>
+          <a href="{{ linkedinUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:34px; padding:0 15px; border-radius:10px; border:1px solid #c9d5e0; color:#00447c; font-weight:500; font-size:13px; white-space:nowrap;" style-hover="color:#002d52; border-color:#00447c;">LinkedIn</a>
           <a href="{{ githubUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:34px; padding:0 15px; border-radius:10px; background:#00447c; color:#ffffff; font-weight:500; font-size:13px; white-space:nowrap;" style-hover="color:#ffffff; background:#002d52;">GitHub</a>
         </div>
       </sc-if>
@@ -73,7 +74,8 @@
           <a href="#people" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">People</a>
           <a href="#collab" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">Collab</a>
           <a href="#contact" onClick="{{ closeMenu }}" style="display:flex; align-items:center; min-height:48px; font-size:15px; color:#16232f; border-bottom:1px solid #eef2f6;">Contact</a>
-          <a href="{{ githubUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:46px; margin-top:14px; border-radius:10px; background:#00447c; color:#ffffff; font-weight:500; font-size:14px;" style-hover="color:#ffffff;">GitHub organization</a>
+          <a href="{{ linkedinUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:46px; margin-top:14px; border-radius:10px; border:1px solid #c9d5e0; color:#00447c; font-weight:500; font-size:14px;" style-hover="color:#002d52;">LinkedIn</a>
+          <a href="{{ githubUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="display:inline-flex; align-items:center; justify-content:center; min-height:46px; margin-top:10px; border-radius:10px; background:#00447c; color:#ffffff; font-weight:500; font-size:14px;" style-hover="color:#ffffff;">GitHub organization</a>
         </div>
       </div>
     </sc-if>
@@ -207,16 +209,16 @@
         <div style="font-size:14px; color:#7d8b99; margin-bottom:22px;">Labs and groups we work with closely.</div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:12px;">
           <sc-for list="{{ collaborations }}" as="c" hint-placeholder-count="1">
-            <div style="background:#ffffff; border:1px solid #e3e9ef; border-radius:10px; padding:20px 22px; min-width:0;">
+            <div style="background:#ffffff; border:1px solid #e3e9ef; border-radius:10px; padding:20px 22px; min-width:0; display:grid; grid-row:span 4; grid-template-rows:subgrid; row-gap:0; align-content:start;">
               <sc-if value="{{ c.hasUrl }}" hint-placeholder-val="{{ true }}">
-                <a href="{{ c.url }}" target="_blank" rel="noopener" style="font-family:'Source Serif 4',serif; font-size:19px; line-height:1.3; color:#16232f;" style-hover="color:#00447c;">{{ c.name }}</a>
+                <a href="{{ c.url }}" target="_blank" rel="noopener" style="display:block; align-self:start; font-family:'Source Serif 4',serif; font-size:19px; line-height:1.3; color:#16232f;" style-hover="color:#00447c;">{{ c.pi }}</a>
               </sc-if>
               <sc-if value="{{ c.noUrl }}" hint-placeholder-val="{{ false }}">
-                <span style="font-family:'Source Serif 4',serif; font-size:19px; line-height:1.3; color:#16232f;">{{ c.name }}</span>
+                <span style="display:block; align-self:start; font-family:'Source Serif 4',serif; font-size:19px; line-height:1.3; color:#16232f;">{{ c.pi }}</span>
               </sc-if>
-              <div style="font-size:13.5px; color:#00447c; margin-top:5px;">{{ c.lead }}</div>
-              <div style="font-size:13px; line-height:1.55; color:#7d8b99; margin-top:3px;">{{ c.institution }}</div>
-              <div style="font-size:14px; line-height:1.6; color:#3c4a58; margin-top:12px;">{{ c.note }}</div>
+              <div style="align-self:start; font-size:12.5px; letter-spacing:0.02em; color:#00447c; margin-top:5px;">{{ c.lab }}</div>
+              <div style="align-self:start; font-size:13px; line-height:1.55; color:#7d8b99; margin-top:3px;">{{ c.institution }}</div>
+              <div style="align-self:start; font-size:14px; line-height:1.6; color:#3c4a58; margin-top:12px;">{{ c.note }}</div>
             </div>
           </sc-for>
         </div>
@@ -231,6 +233,7 @@
         <div style="display:flex; flex-wrap:wrap; gap:10px;">
           <a href="{{ contactHref }}" style="display:inline-flex; align-items:center; min-height:42px; padding:0 18px; border-radius:10px; background:#ffffff; color:#002d52; font-weight:500; font-size:14px; overflow-wrap:anywhere;" style-hover="color:#002d52;">{{ contactEmail }}</a>
           <a href="{{ githubUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:42px; padding:0 18px; border-radius:10px; color:#ffffff; font-size:14px; border:1px solid #2c5378;" style-hover="color:#ffffff;">GitHub organization</a>
+          <a href="{{ linkedinUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; min-height:42px; padding:0 18px; border-radius:10px; color:#ffffff; font-size:14px; border:1px solid #2c5378;" style-hover="color:#ffffff;">LinkedIn</a>
         </div>
       </div>
     </section>
@@ -375,6 +378,7 @@ class Component extends DCLogic {
       address: D.address || '',
       location: D.location || [D.university, D.address].filter(Boolean).join(', '),
       githubUrl: D.githubUrl || '#',
+      linkedinUrl: D.linkedinUrl || 'https://www.linkedin.com/company/atlas-luiss',
       scholarUrl: D.scholarUrl || 'https://scholar.google.com/citations?user=rQLINtQAAAAJ&hl=en',
       githubLabel: (D.githubUrl || '').replace(/^https?:\/\/(www\.)?github\.com\//, '') || 'GitHub',
       universityUrl: D.universityUrl || 'https://www.luiss.it/it',
